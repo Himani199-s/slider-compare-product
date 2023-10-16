@@ -1,0 +1,246 @@
+<style>
+ .split-slide-section .slider-item {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+   justify-content: space-between;
+}
+.split-slide-section {
+    background: #ebebed;
+     position: relative;
+}
+  .site-box.box--center-align {
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    padding: 0 172px;
+  }
+  .box--big {
+    width: 50%;
+    min-height: 100vh;
+}
+.site-box-content {
+    position: relative;
+}
+  .site-box-content {
+    z-index: 9;
+}
+ .slider-item-media {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    flex-shrink: 0;
+}
+.slider-item-media {
+    left: 50%;
+}
+.slider-item:first-child .slider-item-media {
+    top: 0;
+}
+.back-to-normal .slider-item-media {
+    position: relative;
+}
+.back-to-normal .slider-item-media {
+    left: 0;
+}
+.slider-item-media>div {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    will-change: transform;
+}
+ .slider-item-media-holder {
+    height: 100vh;
+    position: relative;
+}
+.slider-item-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+
+
+{% if section.blocks.size > 0 %}
+  <div class="split-slide-section back-to-normal" id="{{ section.id }}">
+    {% for block in section.blocks %}
+    <div class="slider-item">
+        {% if block.settings.tagline != blank or block.settings.title != blank or block.settings.subtitle != blank or block.settings.btn_text != blank %}
+            <div class="site-box box--center-align box__heading">
+              <div class="site-box-content slider-item-content reduce-top-margin-if-first">
+              {% if block.settings.tagline != blank %}<span class="tagline">{{ block.settings.tagline }}</span>{% endif %}
+              {% if block.settings.title != blank %}<h2 class="heading h1">{{ block.settings.title }}</h2>{% endif %}
+              {% if block.settings.subtitle != blank %}<span class="subheading">{{ block.settings.subtitle }}</span>{% endif %}
+              {% if block.settings.btn_text != blank and block.settings.btn_link != blank %}<a href="{{ block.settings.btn_link }}" class="btn primary-btn">{{ block.settings.btn_text }}</a>{% endif %}
+              </div>
+            </div>
+        {% endif %}
+        {% if block.settings.slide_image != blank %}
+          <div class="slider-item-media">
+            <div>
+            <div class="slider-item-media-holder">
+              <img src="{{ block.settings.slide_image | img_url: '' }}" alt="{{ block.settings.slide_image.alt }}" loading="lazy" class="slider-item-media-element">
+            </div>
+            </div>
+          </div>
+        {%- else -%}
+          {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
+          {%- if placeholder_slide == 1 -%}
+            {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- else -%}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<script>
+    var currentScroll = window.scrollY;
+    const headerHeight = document.querySelector('.header ').offsetHeight;
+    var main_div = document.querySelector('.split-slide-section');
+    const scrollEnabled = true;
+    const screenHeight = Math.min(window.innerHeight, window.screen.availHeight);
+    const slides = document.querySelectorAll('.slider-item');
+    var slidesMedia = document.querySelectorAll('.slider-item-media > div');
+    const headings = document.querySelectorAll('.box__heading');
+    slides.forEach((elm, key)=>{
+    if ( key == 0 || window.scrollY >= _getOffsetTop(elm) ) {
+    slidesMedia[key].style.height = `100%`;
+    }
+    else {
+    slidesMedia[key].style.height = `0`;
+    }
+    });
+   let previous = -1,
+        currentOld = -1;
+    const SCROLL_SliderHelper = () => {
+    const scrollTop = window.scrollY >=  0 ? window.scrollY : 0;
+    var sliderTop = () => {
+    if (!main_div.getClientRects().length) {
+    return 0;
+    }
+    const rect = main_div.getBoundingClientRect();
+    const win = main_div.ownerDocument.defaultView;
+    return rect.top + win.pageYOffset;
+    };
+   
+    if (scrollEnabled ) {
+    let current = 0;
+    if ( scrollTop + headerHeight - headerHeight < sliderTop() && ! main_div.classList.contains('back-to-normal') ) {
+    main_div.classList.add('back-to-normal');
+    }
+    slides.forEach((elm, key)=>{
+    if (_checkVisible(elm) ) {
+    current = key;
+    }
+    });
+    if ( current != currentOld ) {
+      if ( currentScroll < scrollTop && currentOld > 0 ) {
+          _scrollMedia( current, slides[currentOld], slides[previous], slidesMedia[currentOld], screenHeight);
+      } else if ( currentScroll > window.scrollY && currentOld > 0 ) {
+          _scrollMedia( current, slides[currentOld], slides[previous], slidesMedia[currentOld], 0);
+      }
+      currentOld = current;
+      previous = current-1;
+   }
+    if ( current == 0 && scrollTop + screenHeight >= sliderTop() + main_div.offsetHeight && ! main_div.classList.contains('back-to-normal') ) {
+    main_div.classList.add('back-to-normal');
+    window.removeEventListener('scroll', SCROLL_SliderHelper);
+    }
+    else  if ( current > 0 ) {
+    var scrollValue =  ( scrollTop - sliderTop() ) - screenHeight * ( current - 1 ) ;
+    if ( !main_div.classList.contains('back-to-normal') ) {
+    _scrollMedia( current,slides[current], slides[previous],slidesMedia[current], scrollValue);
+    }
+    if (  scrollTop + screenHeight >= sliderTop() + main_div.offsetHeight && ! main_div.classList.contains('back-to-normal')) {
+    main_div.classList.add('back-to-normal');
+    } else if(scrollTop + screenHeight < sliderTop() + main_div.offsetHeight && main_div.classList.contains('back-to-normal' )) {
+    main_div.classList.remove('back-to-normal');
+    }
+    }
+    
+    }
+    currentScroll = scrollTop;
+    window.addEventListener('scroll', SCROLL_SliderHelper);
+    }
+    SCROLL_SliderHelper();
+    function _scrollMedia(index,currentSlide, previousSlide, currentSlideMedia,scrollValue) {
+    currentSlideMedia.style.height = `${scrollValue}px`;
+    console.log(scrollValue)
+    }
+    function _checkVisible(elm) {
+    const rect = elm.getBoundingClientRect();
+    const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+    return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+    }
+    function _getOffsetTop(elm) {
+    if (!main_div.getClientRects().length) {
+    return 0;
+    }
+    const rect = main_div.getBoundingClientRect();
+    const win = main_div.ownerDocument.defaultView;
+    return rect.top + win.pageYOffset;
+    }
+
+</script>
+
+{% schema %}
+  {
+    "name": "Splite Slide",
+    "class":"main-split-slide",
+    "settings": [],
+    "blocks":[
+      {
+        "type":"split-slide",
+        "name":"Split Slide",
+        "settings":[
+          {
+            "type": "image_picker",
+            "id":"slide_image",
+            "label":"Slide Image"
+          },
+          {
+            "type": "text",
+            "id":"tagline",
+            "label":"Tagline"
+          },
+          {
+            "type": "text",
+            "id":"title",
+            "label":"Heading"
+          },
+          {
+            "type": "textarea",
+            "id":"subtitle",
+            "label":"Subheading"
+          },
+          {
+            "type": "text",
+            "id":"btn_text",
+            "label":"Button Text"
+          },
+          {
+            "type": "url",
+            "id":"btn_link",
+            "label":"Button Link"
+          }
+        ]
+      }     
+    ],
+    "presets":[
+      {
+        "name": "Splite Slide"
+      }
+    ]
+  }
+{% endschema %}

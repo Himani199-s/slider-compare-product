@@ -1,0 +1,139 @@
+{
+  "sections": {
+    "3fd2603f-2f58-479d-aacf-b27dd947e4b3": {
+      "type": "animation_scroll",
+      "blocks": {
+        "8be5e81e-d175-4c7a-ae8d-28c23408af8e": {
+          "type": "split-slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/HDC_Site_Factory_1.jpg",
+            "tagline": "MADE FOR YOU",
+            "title": "Hiut Custom.",
+            "subtitle": "Order the fit of your choice in the fabric of your choice.",
+            "btn_text": "SHOP HIUT CUSTOM",
+            "btn_link": ""
+          }
+        },
+        "64ece59a-0ae6-4389-9386-d0cd3ca2be44": {
+          "type": "split-slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/DSC08844-2.jpg",
+            "tagline": "PRE-AUTUMN COLLECTION",
+            "title": "Womens.",
+            "subtitle": "Two beautiful fabrics.  Three flattering fits.",
+            "btn_text": "SHOP WOMENS.",
+            "btn_link": ""
+          }
+        },
+        "e19a193d-2036-418e-9690-ee23d48849f8": {
+          "type": "split-slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/DSC09625-5.jpg",
+            "tagline": "JUST LAUNCHED.",
+            "title": "Japanese Brown Crosshatch Denim.",
+            "subtitle": "Made by the legendary Nihon Menpu mill.",
+            "btn_text": "SHOP NOW.",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "8be5e81e-d175-4c7a-ae8d-28c23408af8e",
+        "64ece59a-0ae6-4389-9386-d0cd3ca2be44",
+        "e19a193d-2036-418e-9690-ee23d48849f8"
+      ],
+      "settings": {
+      }
+    },
+    "1b3b3beb-3d02-4b3f-9cbf-7298bac7b827": {
+      "type": "image-banner",
+      "blocks": {
+        "template--14386129305675__1b3b3beb-3d02-4b3f-9cbf-7298bac7b827-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1"
+          }
+        },
+        "template--14386129305675__1b3b3beb-3d02-4b3f-9cbf-7298bac7b827-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "template--14386129305675__1b3b3beb-3d02-4b3f-9cbf-7298bac7b827-buttons-1": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--14386129305675__1b3b3beb-3d02-4b3f-9cbf-7298bac7b827-heading-1",
+        "template--14386129305675__1b3b3beb-3d02-4b3f-9cbf-7298bac7b827-text-1",
+        "template--14386129305675__1b3b3beb-3d02-4b3f-9cbf-7298bac7b827-buttons-1"
+      ],
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "4bad6a38-ae8e-4178-b0dc-2be1f9f5237b": {
+      "type": "collage",
+      "blocks": {
+        "template--14386129305675__4bad6a38-ae8e-4178-b0dc-2be1f9f5237b-image-1": {
+          "type": "image",
+          "settings": {
+          }
+        },
+        "template--14386129305675__4bad6a38-ae8e-4178-b0dc-2be1f9f5237b-product-1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "second_image": false
+          }
+        },
+        "template--14386129305675__4bad6a38-ae8e-4178-b0dc-2be1f9f5237b-collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14386129305675__4bad6a38-ae8e-4178-b0dc-2be1f9f5237b-image-1",
+        "template--14386129305675__4bad6a38-ae8e-4178-b0dc-2be1f9f5237b-product-1",
+        "template--14386129305675__4bad6a38-ae8e-4178-b0dc-2be1f9f5237b-collection-1"
+      ],
+      "settings": {
+        "heading": "Multimedia collage",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "3fd2603f-2f58-479d-aacf-b27dd947e4b3",
+    "1b3b3beb-3d02-4b3f-9cbf-7298bac7b827",
+    "4bad6a38-ae8e-4178-b0dc-2be1f9f5237b"
+  ]
+}
